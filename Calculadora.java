@@ -1,13 +1,25 @@
+/**
+ * Clase Calculadora que implementa la interfaz Interfaz para evaluar expresiones en notación postfija.
+ */
 import java.util.StringTokenizer;
 
 public class Calculadora implements Interfaz {
     private Stack<Integer> stack;
 
-  //Constructor
+    /**
+     * Constructor de la clase Calculadora..
+     */
     public Calculadora() {
         stack = new StackVector<>();
     }
 
+    /**
+     * Método para evaluar una expresión en notación postfija.
+     * 
+     * @param operacion La expresión en notación postfija a evaluar.
+     * @return El resultado de la evaluación.
+     * @throws IllegalArgumentException Si la expresión es inválida.
+     */
     @Override
     public int evaluar(String operacion) {
         StringTokenizer tokens = new StringTokenizer(operacion);
@@ -34,6 +46,16 @@ public class Calculadora implements Interfaz {
         return stack.pop();
     }
 
+    /**
+     * Método para realizar una operación entre dos operandos.
+     * 
+     * @param operandoA Primer operando.
+     * @param operandoB Segundo operando.
+     * @param operador  Operador a aplicar (+, -, *, /).
+     * @return El resultado de la operación.
+     * @throws ArithmeticException Si se intenta dividir por cero.
+     * @throws IllegalArgumentException Si el operador no es válido.
+     */
     @Override
     public int operar(int operandoA, int operandoB, String operador) {
         return switch (operador) {
@@ -50,6 +72,12 @@ public class Calculadora implements Interfaz {
         };
     }
 
+    /**
+     * Método privado para verificar si un token es un número entero.
+     * 
+     * @param token El token a verificar.
+     * @return true si el token es un número, false en caso contrario.
+     */
     private boolean esNumero(String token) {
         try {
             Integer.parseInt(token);
